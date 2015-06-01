@@ -61,8 +61,8 @@ else {
 //Do something else
 }
 ```
-* There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
-* `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
+* Nên có dòng trống ngăn cách 2 method với nhau
+* `@synthesize` và `@dynamic` nên khai báo từng dòng cho mỗi cái khi implementation.
 
 ## Conditionals
 
@@ -100,30 +100,6 @@ result = a > b ? x : y;
 ```objc
 result = a > b ? x = c > d ? c : d : y;
 ```
-
-## Error handling
-
-When methods return an error parameter by reference, switch on the returned value, not the error variable.
-
-**For example:**
-```objc
-NSError *error;
-if (![self trySomethingWithError:&error]) {
-    // Handle Error
-}
-```
-
-**Not:**
-```objc
-NSError *error;
-[self trySomethingWithError:&error];
-if (error) {
-    // Handle Error
-}
-```
-
-Some of Apple’s APIs write garbage values to the error parameter (if non-NULL) in successful cases, so switching on the error can cause false negatives (and subsequently crash).
-
 ## Methods
 
 In method signatures, there should be a space after the scope (-/+ symbol). There should be a space between the method segments.
