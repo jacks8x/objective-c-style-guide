@@ -112,36 +112,13 @@ Nên có khoảng trắng giữa ký hiệu (+/-) với tên method.
 ```objc
 -(void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
-## Variables : biến
+## Variables
 
 Tên biến nên đặt sao cho có ý nghĩa, tên biến với 1 chữ cái nên tránh trừ trường hợp trong vòng lặp `for()`
 
 
-Asterisks indicating pointers belong with the variable, e.g., `NSString *text` not `NSString* text` or `NSString * text`, except in the case of constants.
-
-Property definitions should be used in place of naked instance variables whenever possible. Direct instance variable access should be avoided except in initializer methods (`init`, `initWithCoder:`, etc…), `dealloc` methods and within custom setters and getters. For more information on using Accessor Methods in Initializer Methods and dealloc, see [here](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6).
-
-**For example:**
-
-```objc
-@interface NYTSection: NSObject
-
-@property (nonatomic) NSString *headline;
-
-@end
-```
-
-**Not:**
-
-```objc
-@interface NYTSection : NSObject {
-    NSString *headline;
-}
-```
-
-#### Variable Qualifiers
-
-When it comes to the variable qualifiers [introduced with ARC](https://developer.apple.com/library/ios/releasenotes/objectivec/rn-transitioningtoarc/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW4), the qualifier (`__strong`, `__weak`, `__unsafe_unretained`, `__autoreleasing`) should be placed between the asterisks and the variable name, e.g., `NSString * __weak text`. 
+Dấu * thuộc về biến chứ không thuộc về kiểu giá trị của biến
+ví dụ: `NSString *text` not `NSString* text` or `NSString * text`, trừ trường hợp hằng số.
 
 ## Naming
 
@@ -197,17 +174,15 @@ When they are needed, comments should be used to explain **why** a particular pi
 
 Block comments should generally be avoided, as code should be as self-documenting as possible, with only the need for intermittent, few-line explanations. This does not apply to those comments used to generate documentation.
 
-## init and dealloc
+## init
 
-`dealloc` methods should be placed at the top of the implementation, directly after the `@synthesize` and `@dynamic` statements. `init` should be placed directly below the `dealloc` methods of any class.
+`init` methods nên được đặt ở đầu file thực thi ngay sau @synthesize và @dynamic, cấu trúc hàm init như sau:
 
-`init` methods should be structured like this:
-
-```objc
+```objcdynamic
 - (instancetype)init {
     self = [super init]; // or call the designated initializer
     if (self) {
-        // Custom initialization
+        // Custom initializationsau
     }
 
     return self;
@@ -216,9 +191,9 @@ Block comments should generally be avoided, as code should be as self-documentin
 
 ## Literals
 
-`NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
+`NSString`, `NSDictionary`, `NSArray`, và  `NSNumber` hằng số nên sử dụng khi tạo các immutable instances. 
 
-**For example:**
+**Ví dụ:**
 
 ```objc
 NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
@@ -238,11 +213,11 @@ NSNumber *buildingZIPCode = [NSNumber numberWithInteger:10018];
 
 ## CGRect Functions
 
-When accessing the `x`, `y`, `width`, or `height` of a `CGRect`, always use the [`CGGeometry` functions](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html) instead of direct struct member access. From Apple's `CGGeometry` reference:
+Khi truy cập `x`, `y`, `width`, or `height` of a `CGRect`, luôn luôn sử dụng hàm [`CGGeometry` functions](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html). Theo tài liệu của Apple:
 
 > All functions described in this reference that take CGRect data structures as inputs implicitly standardize those rectangles before calculating their results. For this reason, your applications should avoid directly reading and writing the data stored in the CGRect data structure. Instead, use the functions described here to manipulate rectangles and to retrieve their characteristics.
 
-**For example:**
+**Ví dụ:**
 
 ```objc
 CGRect frame = self.view.frame;
@@ -266,9 +241,9 @@ CGFloat height = frame.size.height;
 
 ## Constants
 
-Constants are preferred over in-line string literals or numbers, as they allow for easy reproduction of commonly used variables and can be quickly changed without the need for find and replace. Constants should be declared as `static` constants and not `#define`s unless explicitly being used as a macro.
+Hằng nên được khai báo sử dụng `static` constants không nên sử dụng `#define` trừ trường hợp khai báo các Macro
 
-**For example:**
+**Ví dụ:**
 
 ```objc
 static NSString * const NYTAboutViewControllerCompanyName = @"The New York Times Company";
@@ -284,37 +259,9 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 #define thumbnailHeight 2
 ```
 
-## Enumerated Types
-
-When using `enum`s, it is recommended to use the new fixed underlying type specification because it has stronger type checking and code completion. The SDK now includes a macro to facilitate and encourage use of fixed underlying types — `NS_ENUM()`
-
-**Example:**
-
-```objc
-typedef NS_ENUM(NSInteger, NYTAdRequestState) {
-    NYTAdRequestStateInactive,
-    NYTAdRequestStateLoading
-};
-```
-
-## Bitmasks
-
-When working with bitmasks, use the `NS_OPTIONS` macro.
-
-**Example:**
-
-```objc
-typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
-  NYTAdCategoryAutos      = 1 << 0,
-  NYTAdCategoryJobs       = 1 << 1,
-  NYTAdCategoryRealState  = 1 << 2,
-  NYTAdCategoryTechnology = 1 << 3
-};
-```
-
 ## Private Properties
 
-Private properties should be declared in class extensions (anonymous categories) in the implementation file of a class. Named categories (such as `NYTPrivate` or `private`) should never be used unless extending another class.
+Private properties nên được khai báo trong phần class extension của phần thực thi file của class.
 
 **For example:**
 
@@ -341,11 +288,9 @@ Images that are used for a similar purpose should be grouped in respective group
 
 ## Booleans
 
-Since `nil` resolves to `NO` it is unnecessary to compare it in conditions. Never compare something directly to `YES`, because `YES` is defined to 1 and a `BOOL` can be up to 8 bits.
+Không bao giờ so sánh 1 hàm hay 1 biến với 'YES', bởi vì 'YES' được định nghĩa là 1, và kiểu dữ liệu  'BOOL' thì có 8 bits 
 
-This allows for more consistency across files and greater visual clarity.
-
-**For example:**
+**Ví dụ:**
 
 ```objc
 if (!someObject) {
@@ -361,7 +306,7 @@ if (someObject == nil) {
 
 -----
 
-**For a `BOOL`, here are two examples:**
+**2 ví dụ về 'BOOL':**
 
 ```objc
 if (isAwesome)
@@ -418,21 +363,3 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 #import "NYTButton.h"
 #import "NYTUserView.h"
 ```
-
-## Xcode project
-
-The physical files should be kept in sync with the Xcode project files in order to avoid file sprawl. Any Xcode groups created should be reflected by folders in the filesystem. Code should be grouped not only by type, but also by feature for greater clarity.
-
-When possible, always turn on "Treat Warnings as Errors" in the target's Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
-
-# Other Objective-C Style Guides
-
-If ours doesn't fit your tastes, have a look at some other style guides:
-
-* [Google](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
-* [GitHub](https://github.com/github/objective-c-conventions)
-* [Adium](https://trac.adium.im/wiki/CodingStyle)
-* [Sam Soffes](https://gist.github.com/soffes/812796)
-* [CocoaDevCentral](http://cocoadevcentral.com/articles/000082.php)
-* [Luke Redpath](http://lukeredpath.co.uk/blog/2011/06/28/my-objective-c-style-guide/)
-* [Marcus Zarra](http://www.cimgf.com/zds-code-style-guide/)
