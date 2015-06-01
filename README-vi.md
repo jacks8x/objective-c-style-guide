@@ -102,15 +102,20 @@ result = a > b ? x = c > d ? c : d : y;
 ```
 ## Methods
 
-In method signatures, there should be a space after the scope (-/+ symbol). There should be a space between the method segments.
+Nên có khoảng trắng giữa ký hiệu (+/-) với tên method.
 
-**For Example**:
+**Ví dụ**:
 ```objc
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
-```
-## Variables
+```method
+**Not:**
+```objc
+-(void)setExampleText:(NSString *)text image:(UIImage *)image;
+```method
+## Variables : biến
 
-Variables should be named as descriptively as possible. Single letter variable names should be avoided except in `for()` loops.
+Tên biến nên đặt sao cho có ý nghĩa, tên biến với 1 chữ cái nên tránh trừ trường hợp trong vòng lặp `for()`
+
 
 Asterisks indicating pointers belong with the variable, e.g., `NSString *text` not `NSString* text` or `NSString * text`, except in the case of constants.
 
