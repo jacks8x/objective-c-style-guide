@@ -12,13 +12,12 @@ Một số tài liệu tham khảo:
 * [Dot-Notation Syntax](#dot-notation-syntax)
 * [Spacing](#spacing)
 * [Conditionals](#conditionals)
-  * [Ternary Operator](#ternary-operator)
 * [Error handling](#error-handling)
 * [Methods](#methods)
 * [Variables](#variables)
 * [Naming](#naming)
 * [Comments](#comments)
-* [Init & Dealloc](#init-and-dealloc)
+* [Init](#init-and-dealloc)
 * [Literals](#literals)
 * [CGRect Functions](#cgrect-functions)
 * [Constants](#constants)
@@ -29,7 +28,6 @@ Một số tài liệu tham khảo:
 * [Booleans](#booleans)
 * [Singletons](#singletons)
 * [Imports](#imports)
-* [Xcode Project](#xcode-project)
 
 ## Dot-Notation Syntax
 
@@ -331,7 +329,7 @@ Text and example taken from the [Cocoa Naming Guidelines](https://developer.appl
 
 ## Singletons
 
-Singleton objects should use a thread-safe pattern for creating their shared instance.
+Singleton objects nên sử dụng mẫu thread-safe để tạo shared instance.
 ```objc
 + (instancetype)sharedInstance {
    static id sharedInstance = nil;
