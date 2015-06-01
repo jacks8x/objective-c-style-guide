@@ -33,9 +33,9 @@ Một số tài liệu tham khảo:
 
 ## Dot-Notation Syntax
 
-Dot-notation should **always** be used for accessing and mutating properties. Bracket notation is preferred in all other instances.
+Dot-notation nên luôn sử dụng set,get cho các thuộc tính. Các trường hợp còn lại thì sử dụng Bracket notation([])
 
-**For example:**
+**Ví dụ:**
 ```objc
 view.backgroundColor = [UIColor orangeColor];
 [UIApplication sharedApplication].delegate;
@@ -47,12 +47,12 @@ view.backgroundColor = [UIColor orangeColor];
 UIApplication.sharedApplication.delegate;
 ```
 
-## Spacing
+## Spacing: khoảng trống
 
-* Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
+* Căn lề 4 khoảng trắng, ko bao giờ sử dụng phím tabs, thiết lập khoảng trắng này trong preference của xcode.
+* Dấu ngoặc (`if`/`else`/`switch`/`while` etc.) luôn luôn mở cùng dòng với câu lệnh và kết thúc ở dòng mới
 
-**For example:**
+**Ví dụ:**
 ```objc
 if (user.isHappy) {
 //Do something
@@ -66,12 +66,12 @@ else {
 
 ## Conditionals
 
-Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line "inside" the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
+Nội dung Conditional luôn luôn đặt giữa 2 dấu ngoặc kể cả khi phần nội dung chỉ gồm 1 lệnh duy nhất.
 
-**For example:**
+**Ví dụ:**
 ```objc
 if (!error) {
-    return success;
+    return success;dụ
 }
 ```
 
