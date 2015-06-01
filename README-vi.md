@@ -108,7 +108,7 @@ Nên có khoảng trắng giữa ký hiệu (+/-) với tên method.
 ```objc
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```method
-**Not:**
+**Not**:
 ```objc
 -(void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```method
