@@ -71,7 +71,7 @@ Nội dung Conditional luôn luôn đặt giữa 2 dấu ngoặc kể cả khi p
 **Ví dụ:**
 ```objc
 if (!error) {
-    return success;dụ
+    return success;
 }
 ```
 
@@ -107,11 +107,11 @@ Nên có khoảng trắng giữa ký hiệu (+/-) với tên method.
 **Ví dụ**:
 ```objc
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
-```method
+```
 **Not**:
 ```objc
 -(void)setExampleText:(NSString *)text image:(UIImage *)image;
-```method
+```
 ## Variables : biến
 
 Tên biến nên đặt sao cho có ý nghĩa, tên biến với 1 chữ cái nên tránh trừ trường hợp trong vòng lặp `for()`
